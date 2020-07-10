@@ -79,7 +79,7 @@
       document.getElementById("language").append(liff.getLanguage())
       document.getElementById("accessToken").append(liff.getAccessToken())
       document.getElementById("isInClient").append(liff.isInClient())
-
+      document.getElementById("version").append(liff.getVersion())
       if(liff.isInClient()){
         document.getElementById("btnLogOut").style.display = "none";
       }else{
@@ -88,7 +88,7 @@
         document.getElementById("btnClose").style.display = "none";
       }
     }
-    
+
     async function main() {
       // alert("LINE Developers x Skooldio")
       await liff.init({ liffId: "1654437011-bpxr8Vn3" })
