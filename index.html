@@ -66,6 +66,18 @@
     }
 
     async function sendMsg() {
+      if(liff.getContext().type!=="none"){
+        // Send Sticker
+        await liff.sendMessages([
+            {
+              "type" : "sticker",
+              "stickerId": 1,
+              "packageId": 1
+            }
+          ]);
+        alert("Message Sent");
+        // Send Sticker
+      }
     }
 
     function getContext() {
@@ -74,7 +86,6 @@
       document.getElementById("utouId").append(liff.getContext().utouId)  // Display When Chat 1/1
       document.getElementById("roomId").append(liff.getContext().roomId)  // Display When Room Chat
       document.getElementById("groupId").append(liff.getContext().groupId)  // Display When Group Chat
-      alert(liff.getContext());
     }
 
     async function getUserProfile() {
