@@ -60,6 +60,10 @@
     }
 
     function openWindow() {
+      liff.openWindow({
+        url: "https://line.me",
+        external: false // true จะเปิด Browser อื่น
+      })
     }
 
     async function getFriendship() {
