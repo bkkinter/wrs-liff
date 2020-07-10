@@ -54,6 +54,7 @@
     }
 
     function closed() {
+      liff.closeWindow();
     }
 
     async function scanCode() {
@@ -69,6 +70,12 @@
     }
 
     async function getFriendship() {
+      // const friend = await liff.getFriendship()
+      // document.getElementById("friendship").append(friend.friendFlag)
+      // if(!friend.friendFlag){
+      //   if(confirm("คุณยังไม่ได้เพิ่ม Bot เป็นเพื่อน จะเพิ่มเลยไหม?"))
+      //     window.location = ""// Line QR WEB
+      // }
     }
 
     async function sendMsg() {
@@ -137,11 +144,14 @@
     async function main() {
       // alert("LINE Developers x Skooldio")
       await liff.init({ liffId: "1654437011-bpxr8Vn3" })
-      getEnvironment()
-      getUserProfile()
-      getContext()
-      // getFriendship()
+      document.getElementById("isLoggedIn").append(liff.isLoggedIn())
+      if(liff.isLoggedIn()){
+        getEnvironment()
+        getUserProfile()
+        getContext()
+        // getFriendship()   // กรณีใช้ Line Bot
       // createUniversalLink()
+      }
     }
     main()
   </script>
