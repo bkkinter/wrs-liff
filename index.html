@@ -5,9 +5,98 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
   <link rel="stylesheet" href="css/style.css" media="all">
+  <script src="https://api.longdo.com/map/?key=worldreward"></script>
+  <script src="https://static.line-scdn.net/liff/edge/versions/2.2.0/sdk.js"></script>
+
+  <style type="text/css">
+    html{
+      height:100%; 
+    }
+    body{ 
+      margin:0px;
+      height:100%; 
+    }
+    #map {
+      height: 100%;
+    }
+    #result {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 1px;
+      height: 80%;
+      margin: auto;
+      border: 4px solid #dddddd;
+      background: #ffffff;
+      overflow: auto;
+      z-index: 2;
+      display: none;
+  }
+  </style>
+
+  <script type="text/javascript" src="https://api.longdo.com/map/?key=worldreward"></script>
+  <script>
+    var map;
+    function init() {
+      let startPoint = new longdo.Marker({ lon: 100.538316, lat: 13.764953}, 
+          { 
+              title: 'Start', 
+              detail: 'I\'m here' ,
+              draggable: true,
+          }
+      );
+      let location ={ lat: 0, lng: 0 };
+      map = new longdo.Map({
+        placeholder: document.getElementById('map')
+      });
+      map.Event.bind('click', function() {
+          var mouseLocation = map.location(longdo.LocationMode.Pointer);
+          // map.Overlays.add(new longdo.Marker(mouseLocation));
+
+          // const location = await axios.get(`https://api.longdo.com/map/services/address?lon=${addressValue.lng}&lat=${addressValue.lat}&noelevation=1&key=worldreward`,{})
+          //   .then(response => response.data)
+          //   .catch(error => {
+          //     throw error;
+          // });
+          // if(location.province==="กรุงเทพมหานคร" || location.province==="จ.ปทุมธานี" || location.province==="จ.นนทบุรี" || location.province==="จ.สมุทรปราการ"){
+          
+          //   const data = await axios.get(`https://mmmap15.longdo.com/mmroute/json/route/guide?flon=100.5360959&flat=13.7649136&tlon=${lng}&tlat=${lat}&mode=t&type=25&locale=en&key=worldreward`,{})
+          // .then(response => response.data)
+          // .catch(error => {
+          //   throw error;
+          // });
+          // const meters = data.data[0].distance;
+          
+            map.Route.add(mouseLocation, 
+            { 
+                title: 'End', 
+                detail: 'Target' ,
+                draggable: true,
+            });
+            if(map.Route.list().length===3){
+              map.Route.removeAt(1)
+            }
+        });
+
+      map.Event.bind('contextmenu', function() { return false; });
+      map.Event.bind('beforeContextmenu', function(event) {return false });
+      
+      map.Route.placeholder(document.getElementById('result'));
+      map.Route.add(startPoint);
+
+      map.Event.bind('overlayDrop', function(overlay) {
+        map.Route.search();
+      });
+      
+      map.Route.search();
+
+      
+    }
+  </script>
 </head>
 <body>
-  <p id="os"><b>OS:</b> </p>
+  <!-- <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
   <p id="version"><b>Version:</b> </p>
   <p id="isInClient"><b>isInClient:</b> </p>
@@ -28,23 +117,27 @@
   <p id="universalLink1"><b>Universal Link:</b> </p>
   <p id="universalLink2"><b>Universal Link with Query params:</b> </p>
   <p><a href="https://bkkinter.github.io/wrs-liff/path/?param=9">Link to Path</a></p>
-
+  
   <button id="btnMsg" onclick="sendMsg()">Send Message</button>
   <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
   <button onclick="openWindow()">Open Window</button>
   <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
-  <button id="btnClose" onclick="closed()">Close</button>
+  <button id="btnClose" onclick="closed()">Close</button> -->
+
+
+  <div id="map" style="width: 100%;height: 700px;"></div>
+  <div id="result"></div>
 
   <script src="js/vconsole.min.js"></script>
   <script>
     var vConsole = new VConsole()
     console.log("Hello World!")
-    errorPls();
+    // errorPls();
   </script>
 
-  <script src="https://static.line-scdn.net/liff/edge/versions/2.2.0/sdk.js"></script>
   <script>
+    var map;
     function createUniversalLink() {
       const link1 = liff.permanentLink.createUrl();
       document.getElementById("universalLink1").append(link1)
@@ -174,11 +267,17 @@
           // getFriendship()   // กรณีใช้ Line Bot
           createUniversalLink()
         }else{
-          liff.login()
+          // liff.login()
         }
       })
     }
+
+   
+        
+
+    init()
     main()
+    
   </script>
 </body>
 </html>
