@@ -24,6 +24,7 @@
   <script>
     async function getUserProfile() {
       const profile = await liff.getProfile();
+      alert(profile)
       document.getElementById("pictureUrl").src = profile.pictureUrl;
       document.getElementById("userId").append(profile.userId)
       document.getElementById("statusMessage").append(profile.statusMessage)
@@ -31,17 +32,17 @@
       document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
     }
   
-  async function main() {
-    // alert("LINE Developers x Skooldio")
-    await liff.init({ liffId: "1654437011-bpxr8Vn3" })
-    alert(liff.isLoggedIn())
-    if(liff.isLoggedIn()){
-      getUserProfile()
-    }else{
-      liff.login({ redirectUri:"https://bkkinter.github.io/wrs-liff/path"})
+    async function main() {
+      // alert("LINE Developers x Skooldio")
+      await liff.init({ liffId: "1654437011-bpxr8Vn3" })
+      alert(liff.isLoggedIn())
+      if(liff.isLoggedIn()){
+        getUserProfile()
+      }else{
+        liff.login()
+      }
     }
-  }
-  main()
+    main()
 </script>
 </body>
 </html>
