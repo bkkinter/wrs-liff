@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
   <link rel="stylesheet" href="css/style.css" media="all">
-  <script src="https://api.longdo.com/map/?key=worldreward"></script>
+  <script src="https://api.longdo.com/map/?key=[keys]"></script>
   <script src="https://static.line-scdn.net/liff/edge/versions/2.2.0/sdk.js"></script>
 
   <style type="text/css">
@@ -35,7 +35,7 @@
   }
   </style>
 
-  <script type="text/javascript" src="https://api.longdo.com/map/?key=worldreward"></script>
+  <script type="text/javascript" src="https://api.longdo.com/map/?key=[keys]"></script>
   <script>
     var map;
     function init() {
@@ -54,14 +54,14 @@
           var mouseLocation = map.location(longdo.LocationMode.Pointer);
           // map.Overlays.add(new longdo.Marker(mouseLocation));
 
-          // const location = await axios.get(`https://api.longdo.com/map/services/address?lon=${addressValue.lng}&lat=${addressValue.lat}&noelevation=1&key=worldreward`,{})
+          // const location = await axios.get(`https://api.longdo.com/map/services/address?lon=${addressValue.lng}&lat=${addressValue.lat}&noelevation=1&key=[keys]`,{})
           //   .then(response => response.data)
           //   .catch(error => {
           //     throw error;
           // });
           // if(location.province==="กรุงเทพมหานคร" || location.province==="จ.ปทุมธานี" || location.province==="จ.นนทบุรี" || location.province==="จ.สมุทรปราการ"){
           
-          //   const data = await axios.get(`https://mmmap15.longdo.com/mmroute/json/route/guide?flon=100.5360959&flat=13.7649136&tlon=${lng}&tlat=${lat}&mode=t&type=25&locale=en&key=worldreward`,{})
+          //   const data = await axios.get(`https://mmmap15.longdo.com/mmroute/json/route/guide?flon=100.5360959&flat=13.7649136&tlon=${lng}&tlat=${lat}&mode=t&type=25&locale=en&key=[keys]`,{})
           // .then(response => response.data)
           // .catch(error => {
           //   throw error;
